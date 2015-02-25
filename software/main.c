@@ -8,6 +8,15 @@
 #include <avr/pgmspace.h>
 #include <avr/eeprom.h>
 
+#include <stdio.h>
+
+#include "i2cmaster.h"
+
+#define BAUD 9600
+
+#include <util/setbaud.h>
+
+
 // Sends one bit to LEDS
 // 'r' is the register variable that contains the bit to send
 // sends bit at bit position 'b'
@@ -37,56 +46,133 @@ const uint8_t EEMEM rgb[] = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x0F,0x00,	// Blue
 };
 
+#define MMA7660_ADR 0x4C
+
+
+// TODO: Remove these help functions later
+void uart_init(void) {
+    UBRR0H = UBRRH_VALUE;
+    UBRR0L = UBRRL_VALUE;
+
+#if USE_2X
+    UCSR0A |= _BV(U2X0);
+#else
+    UCSR0A &= ~(_BV(U2X0));
+#endif
+
+    UCSR0C = _BV(UCSZ01) | _BV(UCSZ00); /* 8-bit data */
+    UCSR0B = _BV(RXEN0) | _BV(TXEN0);   /* Enable RX and TX */
+}
+
+
+void serial_print(char * c)
+{
+	while(*c)
+	{
+		while ((UCSR0A & (1 << UDRE0)) == 0) {}; // Do nothing until UDR is ready for more data to be written to it
+		UDR0 = *(c++); // Echo back the received byte back to the computer
+	}
+}
+
 int main(void)
 {
-	// Colors to send
-	uint8_t g[8], r[8], b[8];
-	uint8_t i=0, rx=0, gx=0, bx=0, idx=0;
+	unsigned char ret = 5;
+	unsigned char x_axis = 0;
+	char serial[30] = {0};
+	char * serial_pointer;
 
-	// Setup output and extra timing pin to trigger scope
-	DDRB|=_BV(PIN3);	// LED TX
-	DDRC|=_BV(PIN0);	// LED TX
-	// Fetch pattern data
-	for (i=0;i<8;i++) {
-		r[i]=eeprom_read_byte(&rgb[i]);
-		g[i]=eeprom_read_byte(&rgb[i+8]);
-		b[i]=eeprom_read_byte(&rgb[i+8+8]);
-	}
-	while (1) {
-		PORTC|=_BV(PIN0);
-		send_leds(r,g,b);	// Send
-		PORTC&=~_BV(PIN0);
-		if (idx<5) {
-			rx=r[0];
-			gx=g[0];
-			bx=b[0];
-			for (i=0;i<7;i++) {
-				r[i]=r[i+1];
-				g[i]=g[i+1];
-				b[i]=b[i+1];
-			}
-			r[7]=rx;
-			g[7]=gx;
-			b[7]=bx;
+	uart_init();
+	i2c_init();
+
+	// heartbeat led
+	DDRD |= 1 << 2;
+
+	// Initialize accel
+	i2c_start_wait((MMA7660_ADR << 1) + I2C_WRITE);
+	i2c_write(0x07); 		// Set Device in active Mode
+	i2c_write(0x01);		// Write active mode bit
+	i2c_stop();
+
+	while(1)
+	{
+		// I2C Sample Loop
+		ret = i2c_start((MMA7660_ADR << 1) + I2C_WRITE);
+
+		ret = i2c_write(0x00); 		// Set to read from x axis register
+		i2c_rep_start((MMA7660_ADR << 1) + I2C_READ);
+		x_axis = i2c_readNak();		// Read Value
+
+		// Bit 6 signifies error per datasheet
+		if (x_axis & (1<<6))
+		{
+			sprintf(serial, "X Axis: Alert\n");
 		} else {
-			rx=r[7];
-			gx=g[7];
-			bx=b[7];
-			for (i=0;i<7;i++) {
-				r[7-i]=r[7-i-1];
-				g[7-i]=g[7-i-1];
-				b[7-i]=b[7-i-1];
-			}
-			r[0]=rx;
-			g[0]=gx;
-			b[0]=bx;
+			sprintf(serial, "X Axis: %X\r\n", x_axis);
 		}
-		idx++;
-		if (idx>=10) idx=0;
+
+		// Output to serail
+		serial_print(serial);
+
+		// I2C transfer done
+		i2c_stop();
+
+		// Heartbeat LED
+		PORTD ^= (1 << 2);
 		_delay_ms(100);
-		// The LEDs all hold their value so we can
-		// go off and caclulate new values or sleep, whatever
-	}			
+	}
+
+
+
+
+
+	// // Colors to send
+	// uint8_t g[8], r[8], b[8];
+	// uint8_t i=0, rx=0, gx=0, bx=0, idx=0;
+
+	// // Setup output and extra timing pin to trigger scope
+	// DDRB|=_BV(PIN3);	// LED TX
+	// DDRC|=_BV(PIN0);	// LED TX
+	// // Fetch pattern data
+	// for (i=0;i<8;i++) {
+	// 	r[i]=eeprom_read_byte(&rgb[i]);
+	// 	g[i]=eeprom_read_byte(&rgb[i+8]);
+	// 	b[i]=eeprom_read_byte(&rgb[i+8+8]);
+	// }
+	// while (1) {
+	// 	PORTC|=_BV(PIN0);
+	// 	send_leds(r,g,b);	// Send
+	// 	PORTC&=~_BV(PIN0);
+	// 	if (idx<5) {
+	// 		rx=r[0];
+	// 		gx=g[0];
+	// 		bx=b[0];
+	// 		for (i=0;i<7;i++) {
+	// 			r[i]=r[i+1];
+	// 			g[i]=g[i+1];
+	// 			b[i]=b[i+1];
+	// 		}
+	// 		r[7]=rx;
+	// 		g[7]=gx;
+	// 		b[7]=bx;
+	// 	} else {
+	// 		rx=r[7];
+	// 		gx=g[7];
+	// 		bx=b[7];
+	// 		for (i=0;i<7;i++) {
+	// 			r[7-i]=r[7-i-1];
+	// 			g[7-i]=g[7-i-1];
+	// 			b[7-i]=b[7-i-1];
+	// 		}
+	// 		r[0]=rx;
+	// 		g[0]=gx;
+	// 		b[0]=bx;
+	// 	}
+	// 	idx++;
+	// 	if (idx>=10) idx=0;
+	// 	_delay_ms(100);
+	// 	// The LEDs all hold their value so we can
+	// 	// go off and caclulate new values or sleep, whatever
+	// }			
 }
 
 // Sends a serial bit stream to string of LEDS

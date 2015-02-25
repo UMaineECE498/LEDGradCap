@@ -16,7 +16,7 @@
 # Microcontroller Type
 ##MCU=atmega168
 # MCU=at90usb162
-MCU=atmega1284p
+MCU=atmega328p
 
 # Target file name (without extension).
 TARGET = main
@@ -44,6 +44,8 @@ FORMAT = ihex
 # uncomment the following:
 #SRC += foo.c bar.c
 
+#SRC += i2c_bitbang.c
+
 # You can also wrap lines by appending a backslash to the end of the line:
 #SRC += baz.c \
 #xyzzy.c
@@ -57,7 +59,7 @@ FORMAT = ihex
 # Even though the DOS/Win* filesystem matches both .s and .S the same,
 # it will preserve the spelling of the filenames, and gcc itself does
 # care about how the name is spelled on its command-line.
-ASRC = 
+ASRC = i2cmaster.S
 
 
 # List any extra directories to look for include files here.
@@ -282,7 +284,8 @@ install: program
 program: begin $(TARGET).hex $(TARGET).eep end
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 
-
+fuse:
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -U lfuse:w:0xe2:m -U hfuse:w:0xd9:m -U efuse:w:0xff:m
 
 
 # Create final output files (.hex, .eep) from ELF output file.
