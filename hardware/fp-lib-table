@@ -1,3 +1,4 @@
 (fp_lib_table
-  (lib (name tom)(type KiCad)(uri /home/sheaff/x//modules/tom_kicad_lib.pretty/)(options "")(descr tom))
+  (lib (name tom)(type KiCad)(uri ${KIPRJMOD}/modules/tom_kicad_lib.pretty/)(options "")(descr tom))
+  (lib (name mods)(type KiCad)(uri ${KIPRJMOD}/mods)(options "")(descr mods))
 )

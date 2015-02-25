@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2014-jan-25)-product date = Fri Feb 20 14:46:29 2015
+Cmp-Mod V01 Created by Cvpcb (2014-jul-16 BZR unknown)-product   date = Tue 24 Feb 2015 11:54:41 PM EST
 
 BeginCmp
 TimeStamp = /54E77970;
@@ -67,7 +67,7 @@ BeginCmp
 TimeStamp = /54E77E58;
 Reference = U1;
 ValeurCmp = MMA7660;
-IdModule  = tom:DFN-10;
+IdModule  = mods:DFN-10;
 EndCmp
 
 EndListe
