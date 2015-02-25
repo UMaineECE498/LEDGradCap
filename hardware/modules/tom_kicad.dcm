@@ -1,0 +1,125 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 2450BM14A002
+D Johanson integrated balun+filter, optimized for Nordic nRF24
+$ENDCMP
+#
+$CMP 2450FB15L0001
+D Johanson integrated balun+filter, optimized for AT86RF230/ATmega256RFR
+$ENDCMP
+#
+$CMP ANT
+D RF antenna (integrated)
+$ENDCMP
+#
+$CMP AT42QT1070
+D capacitive sensor
+$ENDCMP
+#
+$CMP ATmega256RFR2
+D Atmel ATmega256RFR2 : Zigbee/802.15.4 wireless MCU, package QFN64+1, 0.5mm pitch
+$ENDCMP
+#
+$CMP BAL-NRF01D3
+D Integrated balun for use with NRF51822 (QFN48 package)
+$ENDCMP
+#
+$CMP CRYSTAL_SMD_4PIN
+D 4-pin SMD crystal
+$ENDCMP
+#
+$CMP LM3405A
+D LM3405A 1A constant current buck LED driver - TSOT6 package
+$ENDCMP
+#
+$CMP LM7812
+D Linear Regulator +12V
+K POWER REGUL
+F regulator\lm78xx.pdf
+$ENDCMP
+#
+$CMP LP2950
+D LP2950 or regulator w/ OGI pinout
+K POWER REGUL
+$ENDCMP
+#
+$CMP LPC11U3x
+D NXP LPC11U3x in QFP48 package - Cortex-M0 MCU with USB 2.0
+$ENDCMP
+#
+$CMP MCP73832
+D 1S Li-Ion / Li-Po Charger (open drain status output MCP73832/Tri-state MCP73831) in SOT-23 package
+$ENDCMP
+#
+$CMP MIC2860
+D Micrel MIC2860 - High efficiency WLED driver w/ PWM (SC-70/SOT-23)
+$ENDCMP
+#
+$CMP MMA8652
+D Freescale MMA8652 3-axis accelerometer (10-pin DFN)
+$ENDCMP
+#
+$CMP MPL3115A2
+D I2C precision altimeter
+$ENDCMP
+#
+$CMP MS5607
+D Micro Altimeter Module DeltaH = 20cm
+K altimeter
+$ENDCMP
+#
+$CMP NRF51822QF
+D Nordic nRF51822 :  ARM Cortex-M0 with integrated radio for Bluetooth Low Energy - QFN48 package
+$ENDCMP
+#
+$CMP PTC_FUSE
+D PTC resettable fuse
+$ENDCMP
+#
+$CMP SP3481CN
+D SP3481CN, 3.3V Low Power Half-Duplex RS-485 Transceiver 10Mbps, SO8
+K Low Power Half-Duplex RS-485 Transceiver 10Mbps
+F http://www.icbase.com/pdf/SPX/SPX00480106.pdf
+$ENDCMP
+#
+$CMP SP3481EN
+D SP3481EN, Industrial 3.3V Low Power Half-Duplex RS-485 Transceiver 10Mbps, SO8
+K Low Power Half-Duplex RS-485 Transceiver 10Mbps
+F http://www.icbase.com/pdf/SPX/SPX00480106.pdf
+$ENDCMP
+#
+$CMP SP3485CN
+D SP3485CN, 3.3V Low Power Half-Duplex RS-485 Transceiver 10Mbps, SO8
+K Low Power Half-Duplex RS-485 Transceiver 10Mbps
+F http://www.icbase.com/pdf/SPX/SPX00480106.pdf
+$ENDCMP
+#
+$CMP SP3485EN
+D SP3485EN, Industrial 3.3V Low Power Half-Duplex RS-485 Transceiver 10Mbps, SO8
+K Low Power Half-Duplex RS-485 Transceiver 10Mbps
+F http://www.icbase.com/pdf/SPX/SPX00480106.pdf
+$ENDCMP
+#
+$CMP SWD_CONN
+D SWD connector for ARM Cortex-M debug access
+K CONN
+$ENDCMP
+#
+$CMP TC1015
+D 100 mA CMOS LDO with Shutdown and Reference Bypass - SOT23 package
+$ENDCMP
+#
+$CMP TC1016-SC70
+D Microchip TC1016 - 80 mA LDO voltage regulator (SC-70)
+$ENDCMP
+#
+$CMP TC_SWD
+D Tag-Connect small footprint SWD connector
+$ENDCMP
+#
+$CMP USB-MICRO-B
+D USB Micro B connector
+K USB Micro B, USB
+$ENDCMP
+#
+#End Doc Library

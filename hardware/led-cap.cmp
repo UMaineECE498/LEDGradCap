@@ -1,0 +1,73 @@
+Cmp-Mod V01 Created by CvPcb (2014-jan-25)-product date = Fri Feb 20 14:46:29 2015
+
+BeginCmp
+TimeStamp = /54E77970;
+Reference = C1;
+ValeurCmp = .1u;
+IdModule  = SMD_Packages:SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E77984;
+Reference = C2;
+ValeurCmp = 1u;
+IdModule  = SMD_Packages:SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E7790E;
+Reference = IC1;
+ValeurCmp = ATTINY20-X;
+IdModule  = SMD_Packages:TSSOP16;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E779F7;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = Connect:SIL-3;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E779C1;
+Reference = P1;
+ValeurCmp = CONN_2;
+IdModule  = Connect:SIL-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E77A45;
+Reference = P2;
+ValeurCmp = CONN_6;
+IdModule  = Connect:SIL-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E78EA8;
+Reference = Q1;
+ValeurCmp = IRLML2402PbF;
+IdModule  = SMD_Packages:SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E77999;
+Reference = R1;
+ValeurCmp = 2k2;
+IdModule  = SMD_Packages:SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E779AD;
+Reference = R2;
+ValeurCmp = 2k2;
+IdModule  = SMD_Packages:SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E77E58;
+Reference = U1;
+ValeurCmp = MMA7660;
+IdModule  = tom:DFN-10;
+EndCmp
+
+EndListe
