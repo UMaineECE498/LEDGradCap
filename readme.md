@@ -5,3 +5,7 @@ The goal of this course is to create a device that can be given to each graduati
 
 More Information:
 https://sites.google.com/a/maine.edu/ece498/
+
+
+## Setting the atmega1284p to 8MhZ
+    avrdude -p atmega1284p -P usb -c avrispmkII -U lfuse:w:0xc2:m -U hfuse:w:0x99:m -U efuse:w:0xff:m
