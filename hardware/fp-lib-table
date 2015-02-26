@@ -3,4 +3,5 @@
   (lib (name prgm)(type Legacy)(uri ${KIPRJMOD}/mods/bcProgramHeader.mod)(options "")(descr mods2))
   (lib (name tssop-14)(type Legacy)(uri ${KIPRJMOD}/mods/TSSOP14.mod)(options "")(descr ""))
   (lib (name mods.pretty)(type KiCad)(uri ${KIPRJMOD}/mods.pretty)(options "")(descr ""))
+  (lib (name dfn-10)(type Legacy)(uri ${KIPRJMOD}/mods/mma7660fc.mod)(options "")(descr ""))
 )
