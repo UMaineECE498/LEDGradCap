@@ -1,0 +1,77 @@
+PCBNEW-LibModule-V1  Sun 13 Jul 2014 01:28:14 PM EDT
+# encoding utf-8
+$INDEX
+bcProgramHeader
+bcProgramHeader_bottom
+$EndINDEX
+$MODULE bcProgramHeader
+Po 0 0 0 15 53C2C174 00000000 ~~
+Li bcProgramHeader
+Sc 00000000
+AR bcProgramHeader
+Op 0 0 0
+T0 0 -2465 600 600 0 120 N I 21 N "top edge connector"
+T1 0 1654 600 600 0 120 N V 21 N "VAL**"
+DS 2291 2299 2047 2299 55 21
+DS -2291 2299 -2047 2299 55 21
+DS 2291 2299 2291 -1650 55 21
+DS 2291 -1650 -2291 -1650 55 21
+DS -2291 -1650 -2291 2299 55 21
+$PAD
+Sh "2" O 787 1575 0 0 0
+Dr 0 0 0
+At SMD N 00888000
+Ne 0 ""
+Po 0 197
+$EndPAD
+$PAD
+Sh "1" O 787 1575 0 0 0
+Dr 0 0 0
+At SMD N 00888000
+Ne 0 ""
+Po -1559 197
+$EndPAD
+$PAD
+Sh "3" O 787 1575 0 0 0
+Dr 0 0 0
+At SMD N 00888000
+Ne 0 ""
+Po 1559 197
+$EndPAD
+$EndMODULE  bcProgramHeader
+$MODULE bcProgramHeader_bottom
+Po 0 0 0 15 53C2C1A1 00000000 ~~
+Li bcProgramHeader_bottom
+Sc 00000000
+AR bcProgramHeader
+Op 0 0 0
+T0 0 -2465 600 600 0 120 N I 21 N "bottom edge connector"
+T1 0 1654 600 600 0 120 N V 21 N "VAL**"
+DS 2291 2299 2047 2299 55 21
+DS -2291 2299 -2047 2299 55 21
+DS 2291 2299 2291 -1650 55 21
+DS 2291 -1650 -2291 -1650 55 21
+DS -2291 -1650 -2291 2299 55 21
+$PAD
+Sh "2" O 787 1575 0 0 0
+Dr 0 0 0
+At SMD N 00440001
+Ne 0 ""
+Po 0 197
+$EndPAD
+$PAD
+Sh "1" O 787 1575 0 0 0
+Dr 0 0 0
+At SMD N 00440001
+Ne 0 ""
+Po -1559 197
+$EndPAD
+$PAD
+Sh "3" O 787 1575 0 0 0
+Dr 0 0 0
+At SMD N 00440001
+Ne 0 ""
+Po 1559 197
+$EndPAD
+$EndMODULE  bcProgramHeader_bottom
+$EndLIBRARY

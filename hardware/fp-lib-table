@@ -1,4 +1,7 @@
 (fp_lib_table
-  (lib (name tom)(type KiCad)(uri ${KIPRJMOD}/modules/tom_kicad_lib.pretty/)(options "")(descr tom))
   (lib (name mods)(type KiCad)(uri ${KIPRJMOD}/mods)(options "")(descr mods))
+  (lib (name prgm)(type Legacy)(uri ${KIPRJMOD}/mods/bcProgramHeader.mod)(options "")(descr mods2))
+  (lib (name tssop-14)(type Legacy)(uri ${KIPRJMOD}/mods/TSSOP14.mod)(options "")(descr ""))
+  (lib (name mods.pretty)(type KiCad)(uri ${KIPRJMOD}/mods.pretty)(options "")(descr ""))
+  (lib (name dfn-10.pretty)(type KiCad)(uri ${KIPRJMOD}/dfn-10.pretty)(options "")(descr ""))
 )

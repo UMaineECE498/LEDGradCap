@@ -1,6 +1,6 @@
-update=Fri 20 Feb 2015 13:32:56 EST
+update=Wed 25 Feb 2015 12:27:11 EST
 version=1
-last_client=eeschema
+last_client=kicad
 [cvpcb]
 version=1
 NetIExt=net
@@ -52,6 +52,8 @@ SubpartIdSeparator=0
 SubpartFirstId=65
 LibDir=
 NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
 RptD_X=0
 RptD_Y=100
 RptLab=1

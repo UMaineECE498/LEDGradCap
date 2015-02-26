@@ -1,73 +1,91 @@
-Cmp-Mod V01 Created by Cvpcb (2014-jul-16 BZR unknown)-product   date = Tue 24 Feb 2015 11:54:41 PM EST
+Cmp-Mod V01 Genere par PcbNew le Wed 25 Feb 2015 09:23:32 PM EST
 
 BeginCmp
-TimeStamp = /54E77970;
+TimeStamp = 54EE15D6
+Path = /54E77970
 Reference = C1;
 ValeurCmp = .1u;
-IdModule  = SMD_Packages:SM0805;
+IdModule  = Capacitors_SMD:C_0805_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E77984;
+TimeStamp = 54EE15E2
+Path = /54E77984
 Reference = C2;
 ValeurCmp = 1u;
-IdModule  = SMD_Packages:SM0805;
+IdModule  = Capacitors_SMD:C_0805_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E7790E;
+TimeStamp = 54EE1A7A
+Path = /54E7790E
 Reference = IC1;
 ValeurCmp = ATTINY20-X;
-IdModule  = SMD_Packages:TSSOP16;
+IdModule  = tssop-14:TSSOP14;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E779F7;
+TimeStamp = 54EE1604
+Path = /54E779F7
 Reference = K1;
 ValeurCmp = CONN_3;
-IdModule  = Connect:SIL-3;
+IdModule  = Connect:GS3;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E779C1;
+TimeStamp = 54EE1FD3
+Path = /54EDFF11
+Reference = K2;
+ValeurCmp = CONN_3;
+IdModule  = prgm:bcProgramHeader;
+EndCmp
+
+BeginCmp
+TimeStamp = 54EE1FC6
+Path = /54EDFFA4
+Reference = K3;
+ValeurCmp = CONN_3;
+IdModule  = prgm:bcProgramHeader_bottom;
+EndCmp
+
+BeginCmp
+TimeStamp = 54EE1632
+Path = /54E779C1
 Reference = P1;
 ValeurCmp = CONN_2;
-IdModule  = Connect:SIL-2;
+IdModule  = mods.pretty:AA_Box;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E77A45;
-Reference = P2;
-ValeurCmp = CONN_6;
-IdModule  = Connect:SIL-6;
-EndCmp
-
-BeginCmp
-TimeStamp = /54E78EA8;
+TimeStamp = 54EE1641
+Path = /54E78EA8
 Reference = Q1;
 ValeurCmp = IRLML2402PbF;
-IdModule  = SMD_Packages:SOT23;
+IdModule  = SMD_Packages:SOT-323;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E77999;
+TimeStamp = 54EE164D
+Path = /54E77999
 Reference = R1;
 ValeurCmp = 2k2;
-IdModule  = SMD_Packages:SM0603;
+IdModule  = Resistors_SMD:R_0603_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E779AD;
+TimeStamp = 54EE1659
+Path = /54E779AD
 Reference = R2;
 ValeurCmp = 2k2;
-IdModule  = SMD_Packages:SM0603;
+IdModule  = Resistors_SMD:R_0603_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E77E58;
+TimeStamp = 54EE1D79
+Path = /54E77E58
 Reference = U1;
 ValeurCmp = MMA7660;
-IdModule  = mods:DFN-10;
+IdModule  = dfn-10.pretty:DFN-10;
 EndCmp
 
 EndListe
