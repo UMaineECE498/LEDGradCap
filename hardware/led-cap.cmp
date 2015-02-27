@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by Cvpcb (2014-jul-16 BZR unknown)-product   date = Wed 25 Feb 2015 10:13:44 PM EST
+Cmp-Mod V01 Created by Cvpcb (2014-jul-16 BZR unknown)-product   date = Thu 26 Feb 2015 08:08:38 PM EST
 
 BeginCmp
 TimeStamp = /54E77970;
@@ -29,24 +29,17 @@ IdModule  = mods.pretty:GS3;
 EndCmp
 
 BeginCmp
-TimeStamp = /54EDFF11;
-Reference = K2;
-ValeurCmp = CONN_3;
-IdModule  = prgm:bcProgramHeader;
-EndCmp
-
-BeginCmp
-TimeStamp = /54EDFFA4;
-Reference = K3;
-ValeurCmp = CONN_3;
-IdModule  = prgm:bcProgramHeader_bottom;
-EndCmp
-
-BeginCmp
 TimeStamp = /54E779C1;
 Reference = P1;
-ValeurCmp = CONN_2;
+ValeurCmp = battery;
 IdModule  = mods.pretty:AA_Box;
+EndCmp
+
+BeginCmp
+TimeStamp = /54EFC480;
+Reference = P2;
+ValeurCmp = pgrm;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x06;
 EndCmp
 
 BeginCmp
