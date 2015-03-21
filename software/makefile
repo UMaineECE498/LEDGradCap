@@ -28,7 +28,7 @@ AVRDUDE_PROGRAMMER = avrispmkII
 AVRDUDE_PORT = usb
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c
+SRC = led.c $(TARGET).c
 
 ############# Don't need to change below here for most purposes  (Elliot)
 
