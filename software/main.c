@@ -10,13 +10,20 @@ void change_leds(uint8_t step);
 uint8_t read_accel(void);
 void do_shaky_shaky(void);
 uint8_t tilted_to_left(void);
+// Initialize the system
+void init(void);
 
 #define NUM_LOOPS 10 //number of loops
 #define MAX_STEPS 5  //
 
 int main(void)
 {
-	//initialize_everything();
+	uint8_t red[8]={0};
+	uint8_t green[8]={0};
+	uint8_t blue[8]={0};
+	init();
+	blue[0]=40;
+	send_leds(&red,&green,&blue);
 	while(1) {
 		if(grad_cap_mode()) {
 			do_grad_cap();
@@ -85,4 +92,12 @@ void do_shaky_shaky(void)
 uint8_t tilted_to_left(void)
 {
 	return 0;
+}
+
+// Initiailize the system
+void init(void)
+{
+	PORTB&=~_BV(PIN3);	// Set output to zero first
+	DDRB|=_BV(PIN3);    // LED TX line - need to be an output
+	return;
 }
