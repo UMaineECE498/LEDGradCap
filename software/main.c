@@ -6,6 +6,10 @@
 
 int grad_cap_mode(void);
 void do_grad_cap(void);
+void change_leds(uint8_t step);
+uint8_t read_accel(void);
+void do_shaky_shaky(void);
+uint8_t tilted_to_left(void);
 
 #define NUM_LOOPS 10 //number of loops
 #define MAX_STEPS 5  //
@@ -28,9 +32,12 @@ int main(void)
 // if Z~=0 I'm Shaky Shaky
 int grad_cap_mode(void)
 {
-	//read_accel();
-	if(z > .5)
+	uint8_t z=0;
+
+	z=read_accel();
+	if(z > .5) {
 		return 1;
+	}
 	return 0;
 }
 
@@ -39,10 +46,8 @@ void do_grad_cap(void)
 	int step = 0;
 	int loops = 0;
 
-	while(grad_cap_mode())
-	{
-		if(loops<NUM_LOOPS)
-		{
+	while(grad_cap_mode()) {
+		if(loops<NUM_LOOPS) {
 			change_leds(step);
 		}
 		step++;
@@ -51,8 +56,7 @@ void do_grad_cap(void)
 			loops ++;
 		}
 
-		if (titled_to_left())
-		{
+		if (tilted_to_left()) {
 			step = 0;
 			loops = 0;
 		}
@@ -62,3 +66,23 @@ void do_grad_cap(void)
 }
 
 //detect a clap show a flash of Maine Blue
+
+void change_leds(uint8_t step)
+{
+	return;
+}
+
+
+uint8_t read_accel(void)
+{
+	return 0;
+}
+
+void do_shaky_shaky(void)
+{
+	return;
+}
+uint8_t tilted_to_left(void)
+{
+	return 0;
+}
