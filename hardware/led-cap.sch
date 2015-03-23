@@ -324,18 +324,6 @@ Text Label 5600 3450 0    60   ~ 0
 SDA
 Text Label 5600 3550 0    60   ~ 0
 SCL
-Text Label 5750 4350 0    60   ~ 0
-MISO
-Text Label 5750 4650 0    60   ~ 0
-MOSI
-Text Label 5750 4750 0    60   ~ 0
-RST
-Text Label 5750 4850 0    60   ~ 0
-GND
-Text Label 5750 4450 0    60   ~ 0
-VCC
-Text Label 5750 4550 0    60   ~ 0
-SCLK
 Text Label 5100 3750 0    60   ~ 0
 LED_DATA
 Text Label 5100 3850 0    60   ~ 0
@@ -361,35 +349,21 @@ Wire Wire Line
 Wire Wire Line
 	4000 3000 4000 3100
 Wire Wire Line
-	5000 4550 5350 4550
+	5350 4350 6000 4350
 Wire Wire Line
-	5350 4550 5350 4350
-Wire Wire Line
-	5350 4350 5900 4350
-Wire Wire Line
-	5900 4450 5700 4450
+	5700 4450 6000 4450
 Wire Wire Line
 	5700 4450 5700 4150
 Wire Wire Line
-	5900 4550 5550 4550
+	5200 4550 6000 4550
 Wire Wire Line
-	5550 4550 5550 4150
-Wire Wire Line
-	5550 4150 5000 4150
-Wire Wire Line
-	5900 4650 5450 4650
-Wire Wire Line
-	5450 4650 5450 4450
-Wire Wire Line
-	5450 4450 5000 4450
-Wire Wire Line
-	5900 4750 5200 4750
+	5200 4750 6000 4750
 Wire Wire Line
 	5200 4750 5200 4650
 Wire Wire Line
 	5200 4650 5000 4650
 Wire Wire Line
-	5900 4850 5750 4850
+	5750 4850 6000 4850
 Wire Wire Line
 	5750 4850 5750 4950
 Wire Wire Line
@@ -460,12 +434,32 @@ Connection ~ 7550 3450
 $Comp
 L CONN_6 P2
 U 1 1 54EFC480
-P 6250 4600
-F 0 "P2" V 6200 4600 60  0000 C CNN
-F 1 "pgrm" V 6300 4600 60  0000 C CNN
-F 2 "" H 6250 4600 60  0000 C CNN
-F 3 "" H 6250 4600 60  0000 C CNN
-	1    6250 4600
+P 6350 4600
+F 0 "P2" V 6300 4600 60  0000 C CNN
+F 1 "TPI pgrm" V 6400 4600 60  0000 C CNN
+F 2 "" H 6350 4600 60  0000 C CNN
+F 3 "" H 6350 4600 60  0000 C CNN
+	1    6350 4600
 	1    0    0    -1  
 $EndComp
+Text Label 5750 4850 0    60   ~ 0
+GND
+Text Label 5750 4750 0    60   ~ 0
+RST
+Text Label 5750 4650 0    60   ~ 0
+N/A
+Text Label 5750 4550 0    60   ~ 0
+CLOCK
+Text Label 5750 4450 0    60   ~ 0
+VCC
+Text Label 5750 4350 0    60   ~ 0
+DATA
+Wire Wire Line
+	5000 4350 5200 4350
+Wire Wire Line
+	5200 4350 5200 4550
+Wire Wire Line
+	5000 4450 5350 4450
+Wire Wire Line
+	5350 4450 5350 4350
 $EndSCHEMATC
