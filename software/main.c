@@ -21,17 +21,27 @@ int main(void)
 	uint8_t red[8]={0};
 	uint8_t green[8]={0};
 	uint8_t blue[8]={0};
+
+	PORTA &= ~_BV(PIN4);
+	DDRA |= _BV(PIN4);
+	PORTA |= _BV(PIN4);
+
+
 	init();
-	blue[0]=40;
+	blue[1]=20;
 	send_leds(&red,&green,&blue);
-	while(1) {
-		if(grad_cap_mode()) {
-			do_grad_cap();
-		}
-		else {
-			do_shaky_shaky();
-		}
+	while(1)
+	{
+
 	}
+	// while(1) {
+	// 	if(grad_cap_mode()) {
+	// 		do_grad_cap();
+	// 	}
+	// 	else {
+	// 		do_shaky_shaky();
+	// 	}
+	// }
 	return 0;
 }
 
@@ -97,7 +107,7 @@ uint8_t tilted_to_left(void)
 // Initiailize the system
 void init(void)
 {
-	PORTB&=~_BV(PIN3);	// Set output to zero first
-	DDRB|=_BV(PIN3);    // LED TX line - need to be an output
+	PORTA&=~_BV(PIN3);	// Set output to zero first
+	DDRA|=_BV(PIN3);    // LED TX line - need to be an output
 	return;
 }

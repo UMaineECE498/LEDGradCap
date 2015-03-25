@@ -41,32 +41,32 @@ void send_leds(uint8_t *ra, uint8_t *ga, uint8_t *ba)
 	cli();	// Not interrupts in the critial timing area
 	for (i=0;i<8;i++) {	// For each led
 		c=ga[i];		// Red
-		TX_BIT(c,7,PORTB,3);	// Each bit
-		TX_BIT(c,6,PORTB,3);
-		TX_BIT(c,5,PORTB,3);
-		TX_BIT(c,4,PORTB,3);
-		TX_BIT(c,3,PORTB,3);
-		TX_BIT(c,2,PORTB,3);
-		TX_BIT(c,1,PORTB,3);
-		TX_BIT(c,0,PORTB,3);
+		TX_BIT(c,7,PORTA,3);	// Each bit
+		TX_BIT(c,6,PORTA,3);
+		TX_BIT(c,5,PORTA,3);
+		TX_BIT(c,4,PORTA,3);
+		TX_BIT(c,3,PORTA,3);
+		TX_BIT(c,2,PORTA,3);
+		TX_BIT(c,1,PORTA,3);
+		TX_BIT(c,0,PORTA,3);
 		c=ra[i];		// Green
-		TX_BIT(c,7,PORTB,3);	// Each bit
-		TX_BIT(c,6,PORTB,3);
-		TX_BIT(c,5,PORTB,3);
-		TX_BIT(c,4,PORTB,3);
-		TX_BIT(c,3,PORTB,3);
-		TX_BIT(c,2,PORTB,3);
-		TX_BIT(c,1,PORTB,3);
-		TX_BIT(c,0,PORTB,3);
+		TX_BIT(c,7,PORTA,3);	// Each bit
+		TX_BIT(c,6,PORTA,3);
+		TX_BIT(c,5,PORTA,3);
+		TX_BIT(c,4,PORTA,3);
+		TX_BIT(c,3,PORTA,3);
+		TX_BIT(c,2,PORTA,3);
+		TX_BIT(c,1,PORTA,3);
+		TX_BIT(c,0,PORTA,3);
 		c=ba[i];		// Blue
-		TX_BIT(c,7,PORTB,3);	// Each bit
-		TX_BIT(c,6,PORTB,3);
-		TX_BIT(c,5,PORTB,3);
-		TX_BIT(c,4,PORTB,3);
-		TX_BIT(c,3,PORTB,3);
-		TX_BIT(c,2,PORTB,3);
-		TX_BIT(c,1,PORTB,3);
-		TX_BIT(c,0,PORTB,3);
+		TX_BIT(c,7,PORTA,3);	// Each bit
+		TX_BIT(c,6,PORTA,3);
+		TX_BIT(c,5,PORTA,3);
+		TX_BIT(c,4,PORTA,3);
+		TX_BIT(c,3,PORTA,3);
+		TX_BIT(c,2,PORTA,3);
+		TX_BIT(c,1,PORTA,3);
+		TX_BIT(c,0,PORTA,3);
 	}
 	sei();
 	return;

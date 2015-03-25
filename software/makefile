@@ -16,7 +16,7 @@
 # Microcontroller Type
 ##MCU=atmega168
 # MCU=at90usb162
-MCU=atmega1284p
+MCU=attiny20
 
 # Target file name (without extension).
 TARGET = main
@@ -125,7 +125,7 @@ LDFLAGS += -lm
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 #AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
 
-AVRDUDE_FLAGS = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) 
+AVRDUDE_FLAGS = -p t20 -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) 
 
 # Uncomment the following if you are using arduino (or any other programmer
 # that needs custom baud rate) as a programmer.
@@ -168,7 +168,7 @@ SIZE = avr-size
 
 
 # Programming support using avrdude.
-AVRDUDE = avrdude
+AVRDUDE = /usr/local/avrdude-patched/bin/avrdude
 
 
 REMOVE = rm -f
