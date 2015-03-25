@@ -31,19 +31,6 @@
 	: \
 	); } while (0)
 
-void led_test()
-{
-		register uint8_t c= 0x55;		// Green
-		TX_BIT(c,7,PORTA,3);	// Each bit
-		TX_BIT(c,6,PORTA,3);
-		TX_BIT(c,5,PORTA,3);
-		TX_BIT(c,4,PORTA,3);
-		TX_BIT(c,3,PORTA,3);
-		TX_BIT(c,2,PORTA,3);
-		TX_BIT(c,1,PORTA,3);
-		TX_BIT(c,0,PORTA,3);
-}
-
 // Sends a serial bit stream to string of LEDS
 // ra contains ! 8 ! red values
 // rb contains ! 8 ! green values
