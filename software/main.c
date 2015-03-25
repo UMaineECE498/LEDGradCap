@@ -28,11 +28,21 @@ int main(void)
 
 
 	init();
-	blue[1]=20;
-	send_leds(&red,&green,&blue);
+	blue[0]=10;
+	blue[1]=10;
+	red[2]=10;
+	red[3]=10;
+	blue[4]=10;
+	blue[5]=10;
+	red[6]=10;
+	red[7]=10;
+
 	while(1)
 	{
-
+		send_leds(&red,&green,&blue);
+		_delay_ms(100);
+		//led_test();
+		//_delay_us(100);
 	}
 	// while(1) {
 	// 	if(grad_cap_mode()) {
@@ -107,7 +117,11 @@ uint8_t tilted_to_left(void)
 // Initiailize the system
 void init(void)
 {
-	PORTA&=~_BV(PIN3);	// Set output to zero first
-	DDRA|=_BV(PIN3);    // LED TX line - need to be an output
+	CCP = 0xD8;
+	CLKPSR = 0x00;
+
+	PORTA &= ~_BV(PIN3);	// Set output to zero first
+	DDRA |= _BV(PIN3);    // LED TX line - need to be an output
+
 	return;
 }
