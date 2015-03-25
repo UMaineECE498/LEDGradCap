@@ -1,4 +1,4 @@
-update=Wed 25 Feb 2015 12:27:11 EST
+update=Wed 25 Mar 2015 11:44:49 AM EDT
 version=1
 last_client=kicad
 [cvpcb]
@@ -43,8 +43,6 @@ LibName13=led
 LibName14=dip_sockets
 LibName15=pga_sockets
 LibName16=valves
-[general]
-version=1
 [eeschema]
 version=1
 PageLayoutDescrFile=
@@ -90,3 +88,5 @@ LibName28=atmel
 LibName29=contrib
 LibName30=valves
 LibName31=mma7660
+[general]
+version=1

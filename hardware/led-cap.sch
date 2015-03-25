@@ -446,8 +446,6 @@ Text Label 5750 4850 0    60   ~ 0
 GND
 Text Label 5750 4750 0    60   ~ 0
 RST
-Text Label 5750 4650 0    60   ~ 0
-N/A
 Text Label 5750 4550 0    60   ~ 0
 CLOCK
 Text Label 5750 4450 0    60   ~ 0
