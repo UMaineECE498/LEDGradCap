@@ -1,99 +1,73 @@
-Cmp-Mod V01 Genere par PcbNew le Wed 25 Mar 2015 11:44:17 AM EDT
+Cmp-Mod V01 Created by Cvpcb (2014-jul-16 BZR unknown)-product   date = Thu 26 Mar 2015 05:47:09 PM EDT
 
 BeginCmp
-TimeStamp = 54EE15D6
-Path = /54E77970
+TimeStamp = /54E77970;
 Reference = C1;
 ValeurCmp = .1u;
 IdModule  = Capacitors_SMD:C_0805_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = 54EE15E2
-Path = /54E77984
+TimeStamp = /54E77984;
 Reference = C2;
 ValeurCmp = 1u;
 IdModule  = Capacitors_SMD:C_0805_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = 54EE1A7A
-Path = /54E7790E
+TimeStamp = /54E7790E;
 Reference = IC1;
 ValeurCmp = ATTINY20-X;
 IdModule  = tssop-14:TSSOP14;
 EndCmp
 
 BeginCmp
-TimeStamp = 54EFC63F
-Path = /54E779C1
+TimeStamp = /54E779F7;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = mods.pretty:LEDS;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E779C1;
 Reference = P1;
 ValeurCmp = battery;
 IdModule  = mods.pretty:AA_Box;
 EndCmp
 
 BeginCmp
-TimeStamp = 54EE164D
-Path = /54E77999
+TimeStamp = /54EFC480;
+Reference = P2;
+ValeurCmp = TPI pgrm;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x06;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E78EA8;
+Reference = Q1;
+ValeurCmp = IRLML2402PbF;
+IdModule  = mods.pretty:SOT-323-b;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E77999;
 Reference = R1;
 ValeurCmp = 2k2;
 IdModule  = Resistors_SMD:R_0603_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = 54EE1659
-Path = /54E779AD
+TimeStamp = /54E779AD;
 Reference = R2;
 ValeurCmp = 2k2;
 IdModule  = Resistors_SMD:R_0603_HandSoldering;
 EndCmp
 
 BeginCmp
-TimeStamp = 54EE1604
-Path = /54E779F7
-Reference = K1;
-ValeurCmp = CONN_3;
-IdModule  = mods.pretty:GS3;
-EndCmp
-
-BeginCmp
-TimeStamp = 54EE9231
-Path = /54E77E58
+TimeStamp = /54E77E58;
 Reference = U1;
 ValeurCmp = MMA7660;
 IdModule  = dfn-10:MMA7660FC;
-EndCmp
-
-BeginCmp
-TimeStamp = 54EF2E97
-Path = 
-Reference = 1pin;
-ValeurCmp = VAL**;
-IdModule  = mods.pretty:1pin;
-EndCmp
-
-BeginCmp
-TimeStamp = 54EF2EEF
-Path = 
-Reference = 1pin;
-ValeurCmp = VAL**;
-IdModule  = mods.pretty:1pin;
-EndCmp
-
-BeginCmp
-TimeStamp = 54EFC3FE
-Path = /54EFC480
-Reference = P2;
-ValeurCmp = pgrm;
-IdModule  = Pin_Headers:Pin_Header_Straight_1x06;
-EndCmp
-
-BeginCmp
-TimeStamp = 5512D99F
-Path = /54E78EA8
-Reference = Q1;
-ValeurCmp = IRLML2402PbF;
-IdModule  = mods.pretty:SOT-323-b;
 EndCmp
 
 EndListe

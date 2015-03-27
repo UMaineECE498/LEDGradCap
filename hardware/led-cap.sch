@@ -355,13 +355,11 @@ Wire Wire Line
 Wire Wire Line
 	5700 4450 5700 4150
 Wire Wire Line
-	5200 4550 6000 4550
+	5650 4550 6000 4550
 Wire Wire Line
 	5200 4750 6000 4750
 Wire Wire Line
-	5200 4750 5200 4650
-Wire Wire Line
-	5200 4650 5000 4650
+	5000 4650 5650 4650
 Wire Wire Line
 	5750 4850 6000 4850
 Wire Wire Line
@@ -445,9 +443,9 @@ $EndComp
 Text Label 5750 4850 0    60   ~ 0
 GND
 Text Label 5750 4750 0    60   ~ 0
-RST
+CLK
 Text Label 5750 4550 0    60   ~ 0
-CLOCK
+RST
 Text Label 5750 4450 0    60   ~ 0
 VCC
 Text Label 5750 4350 0    60   ~ 0
@@ -455,9 +453,11 @@ DATA
 Wire Wire Line
 	5000 4350 5200 4350
 Wire Wire Line
-	5200 4350 5200 4550
-Wire Wire Line
 	5000 4450 5350 4450
 Wire Wire Line
 	5350 4450 5350 4350
+Wire Wire Line
+	5200 4350 5200 4750
+Wire Wire Line
+	5650 4650 5650 4550
 $EndSCHEMATC
