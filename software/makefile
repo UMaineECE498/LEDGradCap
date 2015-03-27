@@ -16,7 +16,7 @@
 # Microcontroller Type
 ##MCU=atmega168
 # MCU=at90usb162
-MCU=atmega1284p
+MCU=attiny20
 
 # Target file name (without extension).
 TARGET = main
@@ -57,7 +57,7 @@ FORMAT = ihex
 # Even though the DOS/Win* filesystem matches both .s and .S the same,
 # it will preserve the spelling of the filenames, and gcc itself does
 # care about how the name is spelled on its command-line.
-ASRC = 
+ASRC = i2cmaster.S
 
 
 # List any extra directories to look for include files here.
@@ -125,7 +125,7 @@ LDFLAGS += -lm
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 #AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
 
-AVRDUDE_FLAGS = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) 
+AVRDUDE_FLAGS = -p t20 -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) 
 
 # Uncomment the following if you are using arduino (or any other programmer
 # that needs custom baud rate) as a programmer.
@@ -168,7 +168,7 @@ SIZE = avr-size
 
 
 # Programming support using avrdude.
-AVRDUDE = avrdude
+AVRDUDE = /usr/local/avrdude-patched/bin/avrdude
 
 
 REMOVE = rm -f

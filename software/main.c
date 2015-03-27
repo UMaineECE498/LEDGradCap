@@ -4,6 +4,9 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+#include "system.h"
+#include "i2cmaster.h"
+
 int grad_cap_mode(void);
 void do_grad_cap(void);
 void change_leds(uint8_t step);
@@ -11,7 +14,7 @@ uint8_t read_accel(void);
 void do_shaky_shaky(void);
 uint8_t tilted_to_left(void);
 // Initialize the system
-void init(void);
+void system_init(void);
 
 #define NUM_LOOPS 10 //number of loops
 #define MAX_STEPS 5  //
@@ -21,17 +24,46 @@ int main(void)
 	uint8_t red[8]={0};
 	uint8_t green[8]={0};
 	uint8_t blue[8]={0};
-	init();
-	blue[0]=40;
-	send_leds(&red,&green,&blue);
-	while(1) {
-		if(grad_cap_mode()) {
-			do_grad_cap();
+
+	system_init();
+#if 0
+	blue[0]=10;
+	blue[1]=10;
+	red[2]=10;
+	red[3]=10;
+	blue[4]=10;
+	blue[5]=10;
+	red[6]=10;
+	red[7]=10;
+#endif
+
+	while(1)
+	{
+		int ret = i2c_start((MMA7660_ADR << 1) + I2C_WRITE);
+
+		ret = i2c_write(0x00); 		// Set to read from x axis register
+		i2c_rep_start((MMA7660_ADR << 1) + I2C_READ);
+		blue[0] = i2c_readNak();		// Read Value
+		blue[0]=blue[0]&0x1f;
+		if (blue[0]>15) {
+			red[0]=31-blue[0];
+			blue[0]=0;
+		} else {
+			red[0]=0;
 		}
-		else {
-			do_shaky_shaky();
-		}
+		i2c_stop();
+
+		send_leds(&red,&green,&blue);
+		_delay_ms(10);
 	}
+	// while(1) {
+	// 	if(grad_cap_mode()) {
+	// 		do_grad_cap();
+	// 	}
+	// 	else {
+	// 		do_shaky_shaky();
+	// 	}
+	// }
 	return 0;
 }
 
@@ -95,9 +127,29 @@ uint8_t tilted_to_left(void)
 }
 
 // Initiailize the system
-void init(void)
+void system_init(void)
 {
-	PORTB&=~_BV(PIN3);	// Set output to zero first
-	DDRB|=_BV(PIN3);    // LED TX line - need to be an output
+	// Remove System Clock Division
+	CCP = 0xD8;
+	CLKPSR = 0x00;
+
+	// Enable LED Output Pins
+	LED_DATA_PORT &= ~_BV(LED_DATA_PIN);	// Set output to zero first
+	LED_DATA_DIR |= _BV(LED_DATA_PIN);    // LED TX line - need to be an output
+
+	// Enable LED Output MOSFET
+	LED_EN_PORT &= ~_BV(LED_EN_PIN);
+	LED_EN_DIR |= _BV(LED_EN_PIN);
+	LED_EN_PORT |= _BV(LED_EN_PIN);
+
+	// Initialize bit-bang i2c and activate accelerometer
+	i2c_init();
+
+	i2c_start_wait((MMA7660_ADR << 1) + I2C_WRITE);
+	i2c_write(0x07); 		// Set Device in active Mode
+	i2c_write(0x01);		// Write active mode bit
+	i2c_stop();
+
+
 	return;
 }
