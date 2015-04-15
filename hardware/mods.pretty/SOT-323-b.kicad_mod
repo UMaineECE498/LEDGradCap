@@ -1,7 +1,7 @@
-(module SOT-323-b placed (layer F.Cu) (tedit 5512D850)
+(module SOT-323-b placed (layer F.Cu) (tedit 551C0256)
   (tags "SMD SOT")
   (attr smd)
-  (fp_text reference Q1 (at -5.08 1.27 90) (layer F.SilkS)
+  (fp_text reference Q1 (at 2.413 0.1905 90) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)))
   )
   (fp_text value IRLML2402PbF (at 0 -3.81) (layer F.SilkS) hide
@@ -15,9 +15,9 @@
   (fp_line (start -0.254 0.4445) (end -0.254 0.3175) (layer F.SilkS) (width 0.15))
   (fp_line (start 0.889 1.4605) (end -0.889 1.4605) (layer F.SilkS) (width 0.15))
   (fp_line (start -0.254 0.3175) (end 0.254 0.3175) (layer F.SilkS) (width 0.15))
-  (pad 2 smd rect (at 0.9525 1.77546) (size 0.82296 1.00076) (layers F.Cu F.Paste F.Mask))
-  (pad 1 smd rect (at -0.9525 1.77546) (size 0.82296 1.00076) (layers F.Cu F.Paste F.Mask))
-  (pad 3 smd rect (at 0 0) (size 0.82296 1.00076) (layers F.Cu F.Paste F.Mask))
+  (pad 2 smd rect (at 0.9525 1.77546) (size 0.82296 1.50076) (layers F.Cu F.Paste F.Mask))
+  (pad 1 smd rect (at -0.9525 1.77546) (size 0.82296 1.50076) (layers F.Cu F.Paste F.Mask))
+  (pad 3 smd rect (at 0 0) (size 0.82296 1.50076) (layers F.Cu F.Paste F.Mask))
   (model SMD_Packages/SOT-323.wrl
     (at (xyz 0 0 0.001))
     (scale (xyz 0.3937 0.3937 0.3937))

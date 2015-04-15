@@ -1,4 +1,4 @@
-(module 1pin (layer F.Cu) (tedit 54EFEC2F)
+(module mods.pretty:1pin (layer F.Cu) (tedit 54EFEC2F)
   (descr "module 1 pin (ou trou mecanique de percage)")
   (tags DEV)
   (fp_text reference 1pin (at 0 -3.048) (layer F.SilkS) hide
