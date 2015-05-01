@@ -28,7 +28,7 @@ AVRDUDE_PROGRAMMER = avrispmkII
 AVRDUDE_PORT = usb
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = led.c $(TARGET).c
+SRC = accel.c led.c $(TARGET).c
 
 ############# Don't need to change below here for most purposes  (Elliot)
 
@@ -239,6 +239,9 @@ end:
 
 
 # Display size of file.
+hexsize:
+	@if [ -f $(TARGET).hex ]; then echo; echo 'Size:'; $(HEXSIZE); echo; fi
+
 sizebefore:
 	@if [ -f $(TARGET).elf ]; then echo; echo $(MSG_SIZE_BEFORE); $(ELFSIZE); echo; fi
 
