@@ -11,4 +11,8 @@
 #define LED_EN_DIR		DDRA
 #define LED_EN_PIN	PIN4
 
+extern uint8_t red[8];	// Red values
+extern uint8_t green[8];	// Green values
+extern uint8_t blue[8];	// Blue values
+
 #endif	// __system_h__
