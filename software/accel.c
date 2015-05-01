@@ -11,11 +11,16 @@ uint8_t accel_reg_read(uint8_t addr)
 {
 	uint8_t value;
 
-	i2c_start((MMA7660_ADR << 1) + I2C_WRITE);
-	i2c_write(addr);	// Set to read from x axis register
-	i2c_rep_start((MMA7660_ADR << 1) + I2C_READ);
-	value = i2c_readNak();
+	// Configure I2C Transaction
+
+	// Left shift ADDR 1 bit.  I2c addresses are 7 bits, lsb sets mode
+	i2c_start((MMA7660_ADR << 1) + I2C_WRITE);		// Start in write mode
+	i2c_write(addr);								// Read from specified address
+
+	i2c_rep_start((MMA7660_ADR << 1) + I2C_READ);	// Alert read mode
+	value = i2c_readNak();							// Get the actual value
 	i2c_stop();
+	
 	return value;
 }
 
