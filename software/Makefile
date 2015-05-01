@@ -9,7 +9,7 @@ AVRDUDE=/usr/local/bin/avrdude
 AVDFLAGS=-p t20 -P usb -c avrispmkII -F
 OBJCOPY=avr-objcopy
 OBJCFLAGS=-O ihex -R .eeprom -R .fuse -R .lock
-OBJS=main.o led.o i2cmaster.S
+OBJS=main.o led.o i2cmaster.S accel.o
 #LDFLAGS=-Wl,-u,vfprintf -lprintf_min
 
 .PHONY: program clean

@@ -3,40 +3,56 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <string.h>
 
 #include "system.h"
 #include "i2cmaster.h"
 #include "led.h"
+#include "accel.h"
 
 int grad_cap_mode(void);
 void do_grad_cap(void);
-void change_leds(uint8_t step);
-uint8_t read_accel(void);
 void do_shaky_shaky(void);
 uint8_t tilted_to_left(void);
 // Initialize the system
 void system_init(void);
+void display_msg(const char *m, uint8_t limit);
 
-#define NUM_LOOPS 10 //number of loops
-#define MAX_STEPS 5  //
+#define NUM_LOOPS 10		//number of loops
+#define MAX_STEPS 5		//
+
+uint8_t red[8] = { 0 };	// Red values
+uint8_t green[8] = { 0 };	// Green values
+uint8_t blue[8] = { 0 };	// Blue values
 
 int main(void)
 {
-	uint8_t red[8]={0};
-	uint8_t green[8]={0};
-	uint8_t blue[8]={0};
+	int8_t x[8];		// X axis accel values
+	uint8_t i = 0;		// X axis index
+	uint8_t j = 0;		// General index
+	int16_t a = 0;		// Average value
 
-	system_init();
+	system_init();		// System init
 
-	while(1)
-	{
-		int ret = i2c_start((MMA7660_ADR << 1) + I2C_WRITE);
-
-		ret = i2c_write(0x00); 		// Set to read from x axis register
-		i2c_rep_start((MMA7660_ADR << 1) + I2C_READ);
-		i2c_stop();
-
-		send_leds(red,green,blue);
+	while (1) {
+		x[i] = accel_reg_read(ACCEL_X_AXIS) & 0x3F;	// Get X axis
+		if (x[i] & 0x20) {
+			x[i] = x[i] & 0xc0;
+		}
+		i++;
+		i = i & 0x07;
+		a = 0;
+		for (j = 0; j < 8; j++) {	// Average
+			a += x[j];
+		}
+		a = a / 8;
+		for (j = 0; j < 8; j++) {
+			blue[j] = 16;
+			if (((a >> j) & 0x01) == 0) {
+				blue[j] = 0;
+			}
+		}
+		send_leds(red, green, blue);	// Write
 		_delay_ms(10);
 	}
 	return 0;
@@ -46,12 +62,16 @@ int main(void)
 // if Z~=0 I'm Shaky Shaky
 int grad_cap_mode(void)
 {
-	uint8_t z=0;
+	uint8_t z = 0;
 
-	z=read_accel();
-	if(z > .5) {
-		return 1;
+	while (1) {
+		z = accel_reg_read(ACCEL_Z_AXIS) & 0x3F;
+		if (z > 16) {
+			return 1;
+		}
+
 	}
+
 	return 0;
 }
 
@@ -60,14 +80,14 @@ void do_grad_cap(void)
 	int step = 0;
 	int loops = 0;
 
-	while(grad_cap_mode()) {
-		if(loops<NUM_LOOPS) {
-			change_leds(step);
+	while (grad_cap_mode()) {
+		if (loops < NUM_LOOPS) {
+			//change_leds(step);
 		}
 		step++;
-		if(step>MAX_STEPS) {
+		if (step > MAX_STEPS) {
 			step = 0;
-			loops ++;
+			loops++;
 		}
 
 		if (tilted_to_left()) {
@@ -81,21 +101,61 @@ void do_grad_cap(void)
 
 //detect a clap show a flash of Maine Blue
 
-void change_leds(uint8_t step)
-{
-	return;
-}
-
-
-uint8_t read_accel(void)
-{
-	return 0;
-}
+enum { RIGHT, CCW, LEFT, CWDISP, CWBLANK };
 
 void do_shaky_shaky(void)
 {
+	uint8_t state = CCW;
+	uint8_t x;
+	char msg[]="BRUCE";
+
+	while (1) {
+		x = accel_reg_read(ACCEL_X_AXIS) & 0x3F;	// Get X axis
+		if (x > 31)
+			x = x - 64;
+		switch (state) {
+		case CWDISP:	// Starting CW travel - display message once
+			display_msg(msg, 5);
+			state = CWBLANK;
+			break;
+		case CWBLANK:	// Message ended but still traveling CW
+			if (x == 31)
+				state = RIGHT;	// Wait until at right
+			break;
+		case CCW:	// Traveling CCW - no message
+			if (x == -32)
+				state = LEFT;	// Wait until at left
+			break;
+		case RIGHT:	// At right extreme
+			if (x < 31)
+				state = CCW;	// Wait until turn around
+			break;
+		case LEFT:	// At left extreme
+			if (x > -32)
+				state = CWDISP;	// Wait until turn around
+			break;
+		}
+	}
 	return;
 }
+
+void display_msg(const char *m, uint8_t limit)
+{
+	unsigned char c, i, j;
+
+	// String index
+	i = 0;
+	while (m[i]) {		// For each character
+		_delay_us(2000);
+		i++;		// Next letter
+		if (i >= strlen(m))
+			return;	// Bail if end of string
+		if (i >= limit)
+			return;	// Bail if limit reached
+	}
+	return;
+}
+
 uint8_t tilted_to_left(void)
 {
 	return 0;
@@ -110,7 +170,7 @@ void system_init(void)
 
 	// Enable LED Output Pins
 	LED_DATA_PORT &= ~_BV(LED_DATA_PIN);	// Set output to zero first
-	LED_DATA_DIR |= _BV(LED_DATA_PIN);    // LED TX line - need to be an output
+	LED_DATA_DIR |= _BV(LED_DATA_PIN);	// LED TX line - need to be an output
 
 	// Enable LED Output MOSFET
 	LED_EN_PORT &= ~_BV(LED_EN_PIN);
@@ -121,8 +181,8 @@ void system_init(void)
 	i2c_init();
 
 	i2c_start_wait((MMA7660_ADR << 1) + I2C_WRITE);
-	i2c_write(0x07); 		// Set Device in active Mode
-	i2c_write(0x01);		// Write active mode bit
+	i2c_write(0x07);	// Set Device in active Mode
+	i2c_write(0x01);	// Write active mode bit
 	i2c_stop();
 
 	return;
