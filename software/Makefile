@@ -1,15 +1,18 @@
 TARGET=gradcap
 CPU=attiny20
+F_CPU=8000000UL
 
 CC=/usr/local/atmel/bin/avr-gcc
 CFLAGS=-funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-small-functions -fpack-struct -fshort-enums -fno-strict-aliasing -fno-split-wide-types -Wall -Wstrict-prototypes -std=gnu99 -MMD -MP -O2 -mmcu=${CPU}
+CFLAGS += -DF_CPU=$(F_CPU)
 SIZE=/usr/local/atmel/bin/avr-size
 LIBS=
 AVRDUDE=/usr/local/bin/avrdude
 AVDFLAGS=-p t20 -P usb -c avrispmkII -F
 OBJCOPY=avr-objcopy
 OBJCFLAGS=-O ihex -R .eeprom -R .fuse -R .lock
-OBJS=main.o led.o i2cmaster.S accel.o
+
+OBJS=main.o led.o i2cmaster.S accel.o ledRoutines.o shaky.o
 #LDFLAGS=-Wl,-u,vfprintf -lprintf_min
 
 .PHONY: program clean
