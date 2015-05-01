@@ -4,6 +4,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <string.h>
+#include <avr/pgmspace.h>
 
 #include "system.h"
 #include "i2cmaster.h"
@@ -16,7 +17,7 @@ void do_shaky_shaky(void);
 uint8_t tilted_to_left(void);
 // Initialize the system
 void system_init(void);
-void display_msg(const char *m, uint8_t limit);
+void display_msg(void);
 
 #define NUM_LOOPS 10		//number of loops
 #define MAX_STEPS 5		//
@@ -46,14 +47,9 @@ int main(void)
 			a += x[j];
 		}
 		a = a / 8;
-		for (j = 0; j < 8; j++) {
-			blue[j] = 16;
-			if (((a >> j) & 0x01) == 0) {
-				blue[j] = 0;
-			}
+		if (a>20) {
+			grad_cap_mode();
 		}
-		send_leds(red, green, blue);	// Write
-		_delay_ms(10);
 	}
 	return 0;
 }
@@ -103,62 +99,112 @@ void do_grad_cap(void)
 
 enum { RIGHT, CCW, LEFT, CWDISP, CWBLANK };
 
+// This does not work
 void do_shaky_shaky(void)
 {
 	uint8_t state = CCW;
-	uint8_t x;
-	char msg[]="BRUCE";
+	int8_t x;
 
 	while (1) {
 		x = accel_reg_read(ACCEL_X_AXIS) & 0x3F;	// Get X axis
 		if (x > 31)
 			x = x - 64;
 		switch (state) {
-		case CWDISP:	// Starting CW travel - display message once
-			display_msg(msg, 5);
-			state = CWBLANK;
-			break;
-		case CWBLANK:	// Message ended but still traveling CW
-			if (x == 31)
-				state = RIGHT;	// Wait until at right
-			break;
-		case CCW:	// Traveling CCW - no message
-			if (x == -32)
-				state = LEFT;	// Wait until at left
-			break;
-		case RIGHT:	// At right extreme
-			if (x < 31)
-				state = CCW;	// Wait until turn around
-			break;
-		case LEFT:	// At left extreme
-			if (x > -32)
-				state = CWDISP;	// Wait until turn around
-			break;
+			case CWDISP:	// Starting CW travel - display message once
+				display_msg();
+				state = CWBLANK;
+				break;
+			case CWBLANK:	// Message ended but still traveling CW
+				if (x == 31)
+					state = RIGHT;	// Wait until at right
+				break;
+			case CCW:	// Traveling CCW - no message
+				if (x == -32)
+					state = LEFT;	// Wait until at left
+				break;
+			case RIGHT:	// At right extreme
+				if (x < 31)
+					state = CCW;	// Wait until turn around
+				break;
+			case LEFT:	// At left extreme
+				if (x > -32)
+					state = CWDISP;	// Wait until turn around
+				break;
 		}
 	}
 	return;
 }
 
-void display_msg(const char *m, uint8_t limit)
-{
-	unsigned char c, i, j;
+const uint8_t msg[] PROGMEM={
+				0x00,0x00,0x7f,
+				0x00,0x00,0x02,
+				0x00,0x00,0x04,
+				0x00,0x00,0x02,
+				0x00,0x00,0x7f,
+				0x00,0x00,0x00,
+				0x00,0x00,0x00,
+				0x00,0x00,0x00,
+				0x00,0x00,0x41,
+				0x00,0x00,0x41,
+				0x00,0x00,0x7f,
+				0x00,0x00,0x41,
+				0x00,0x00,0x41,
+				0x00,0x00,0x00,
+				0x00,0x00,0x00,
+				0x00,0x00,0x00,
+				0x00,0x00,0x7f,
+				0x00,0x00,0x08,
+				0x00,0x00,0x14,
+				0x00,0x00,0x22,
+				0x00,0x00,0x41,
+				0x00,0x00,0x00,
+				0x00,0x00,0x00,
+				0x00,0x00,0x00,
+				0x00,0x00,0x7f,
+				0x00,0x00,0x49,
+				0x00,0x00,0x49,
+				0x00,0x00,0x49,
+				0x00,0x00,0x41,
+};
+#define MSGLEN 87
 
-	// String index
-	i = 0;
-	while (m[i]) {		// For each character
-		_delay_us(2000);
-		i++;		// Next letter
-		if (i >= strlen(m))
-			return;	// Bail if end of string
-		if (i >= limit)
-			return;	// Bail if limit reached
+void display_msg(void)
+{
+	unsigned char r, g, b, i, j;
+
+	for (i=0;i<MSGLEN;i+=3) {
+//		r=pgm_read_byte(&(msg[i]));
+//		g=pgm_read_byte(&(msg[i+1]));
+//		b=pgm_read_byte(&(msg[i+2]));
+		r=0;
+		g=0;
+		b=0;
+		if (i&0x01) b=0xaa;
+		memset(red,255,8);
+		memset(green,255,8);
+		memset(blue,255,8);
+		for (j = 0; j < 8; j++) {
+			if ((r & 0x01) == 0) {
+				red[j] = 0;
+			}
+			if ((g & 0x01) == 0) {
+				green[j] = 0;
+			}
+			if ((b & 0x01) == 0) {
+				blue[j] = 0;
+			}
+			r=r>>1;
+			g=g>>1;
+			b=b>>1;
+		}
+		send_leds(red, green, blue);	// Write
+		_delay_us(10);
 	}
+	memset(red,0,8);
+	memset(green,0,8);
+	memset(blue,0,8);
+	send_leds(red, green, blue);	// Write
 	return;
-}
-
-uint8_t tilted_to_left(void)
-{
-	return 0;
 }
 
 // Initiailize the system
