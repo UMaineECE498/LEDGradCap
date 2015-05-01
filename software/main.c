@@ -62,17 +62,7 @@ int main(void)
     _delay_ms(750);
 
 	while (1) {
-		x[i] = accel_reg_read(ACCEL_X_AXIS) & 0x3F;	// Get X axis
-		if (x[i] & 0x20) {
-			x[i] = x[i] | 0xc0;
-		}
-		i++;
-		i = i & 0x07;
-		a = 0;
-		for (j = 0; j < 8; j++) {	// Average
-			a += x[j];
-		}
-		a = a / 8;
+		a = axis_average(ACCEL_X_AXIS);	// Get X axis
 		if (a>20) {
 			grad_cap_mode();
 		}
