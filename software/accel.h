@@ -19,4 +19,7 @@
 // Reads the value from the give register within the accelerometer
 uint8_t accel_reg_read(uint8_t addr);
 
+// Return the average value of the given axis (8 iterations)
+int8_t axis_average(uint8_t axis);
+
 #endif // __accel_h__
