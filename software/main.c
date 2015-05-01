@@ -34,6 +34,7 @@ int main(void)
 	int16_t a = 0;		// Average value
 
 	system_init();		// System init
+	send_leds(red, green, blue);	// Write
 
 	while (1) {
 		x[i] = accel_reg_read(ACCEL_X_AXIS) & 0x3F;	// Get X axis
@@ -86,7 +87,7 @@ void do_grad_cap(void)
 			loops++;
 		}
 
-		if (tilted_to_left()) {
+		if (accel_reg_read(ACCEL_X_AXIS) & 0x3F) {
 			step = 0;
 			loops = 0;
 		}
@@ -94,7 +95,7 @@ void do_grad_cap(void)
 		_delay_ms(100);
 	}
 }
-
+#if 0
 //detect a clap show a flash of Maine Blue
 
 enum { RIGHT, CCW, LEFT, CWDISP, CWBLANK };
@@ -206,6 +207,7 @@ void display_msg(void)
 	send_leds(red, green, blue);	// Write
 	return;
 }
+#endif
 
 // Initiailize the system
 void system_init(void)
