@@ -37,7 +37,7 @@ int main(void)
 	while (1) {
 		x[i] = accel_reg_read(ACCEL_X_AXIS) & 0x3F;	// Get X axis
 		if (x[i] & 0x20) {
-			x[i] = x[i] & 0xc0;
+			x[i] = x[i] | 0xc0;
 		}
 		i++;
 		i = i & 0x07;
