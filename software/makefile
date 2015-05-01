@@ -239,6 +239,9 @@ end:
 
 
 # Display size of file.
+hexsize:
+	@if [ -f $(TARGET).hex ]; then echo; echo 'Size:'; $(HEXSIZE); echo; fi
+
 sizebefore:
 	@if [ -f $(TARGET).elf ]; then echo; echo $(MSG_SIZE_BEFORE); $(ELFSIZE); echo; fi
 
