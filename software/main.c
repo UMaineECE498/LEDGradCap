@@ -6,6 +6,7 @@
 
 #include "system.h"
 #include "i2cmaster.h"
+#include "led.h"
 
 int grad_cap_mode(void);
 void do_grad_cap(void);
@@ -26,16 +27,6 @@ int main(void)
 	uint8_t blue[8]={0};
 
 	system_init();
-#if 0
-	blue[0]=10;
-	blue[1]=10;
-	red[2]=10;
-	red[3]=10;
-	blue[4]=10;
-	blue[5]=10;
-	red[6]=10;
-	red[7]=10;
-#endif
 
 	while(1)
 	{
@@ -43,27 +34,11 @@ int main(void)
 
 		ret = i2c_write(0x00); 		// Set to read from x axis register
 		i2c_rep_start((MMA7660_ADR << 1) + I2C_READ);
-		blue[0] = i2c_readNak();		// Read Value
-		blue[0]=blue[0]&0x1f;
-		if (blue[0]>15) {
-			red[0]=31-blue[0];
-			blue[0]=0;
-		} else {
-			red[0]=0;
-		}
 		i2c_stop();
 
-		send_leds(&red,&green,&blue);
+		send_leds(red,green,blue);
 		_delay_ms(10);
 	}
-	// while(1) {
-	// 	if(grad_cap_mode()) {
-	// 		do_grad_cap();
-	// 	}
-	// 	else {
-	// 		do_shaky_shaky();
-	// 	}
-	// }
 	return 0;
 }
 
@@ -149,7 +124,6 @@ void system_init(void)
 	i2c_write(0x07); 		// Set Device in active Mode
 	i2c_write(0x01);		// Write active mode bit
 	i2c_stop();
-
 
 	return;
 }

@@ -4,7 +4,6 @@
 #define LED_H
 #include <stdint.h>
 
-void led_test();
 // Send 8, 24 bit "frames" to 8 leds.
 // ra contains ! 8 ! red values
 // rb contains ! 8 ! green values

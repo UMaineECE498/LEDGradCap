@@ -5,8 +5,6 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <stdint.h>
-#include <avr/pgmspace.h>
-#include <avr/eeprom.h>
 
 #include "led.h"
 
