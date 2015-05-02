@@ -15,11 +15,18 @@
 #define ACCEL_PDET		0x09	// Tap/Pulse Detection Register (Read/Write)
 #define ACCEL_FD		0x0A	// Tap/Pulse Debounce Count Register (R/W)
 
+typedef enum {ORIENT_L, ORIENT_R, ORIENT_F, ORIENT_B, ORIENT_UK} ORIENTATION_T;
 
 // Reads the value from the give register within the accelerometer
 uint8_t accel_reg_read(uint8_t addr);
 
 // Return the average value of the given axis (8 iterations)
 int8_t axis_average(uint8_t axis);
+
+// Determine the current orientation from accelerometer
+ORIENTATION_T accel_get_orientation(void);
+
+// Debounce orientation detection
+ORIENTATION_T accel_confirm_orientation(ORIENTATION_T orientation, uint8_t threshold);
 
 #endif // __accel_h__
