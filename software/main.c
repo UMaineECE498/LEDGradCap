@@ -39,31 +39,24 @@ int main(void)
 	system_init();		// System init
 	send_leds(red, green, blue);	// Write
 
-    //  Fade test
-    //  Set colors up, then fade in & out
-    simpleFade(red, IN);
-    _delay_ms(750);
-    simpleFade(red, OUT);
-    _delay_ms(750);
-
-    simpleFade(green, IN);
-    _delay_ms(750);
-    simpleFade(green, OUT);
-    _delay_ms(750);
-
-    simpleFade(blue, IN);
-    _delay_ms(750);
-    simpleFade(blue, OUT);
-    _delay_ms(750);
-
 	while (1) {
-		a = axis_average(ACCEL_X_AXIS);	// Get X axis
-		if (a>20) {
-			grad_cap_mode();
+		if (accel_get_orientation() == ORIENT_L)
+		{
+			red[1] = 100;
+		} else {
+			red[1] = 0;
 		}
+
+		send_leds(red, green, blue);
+
+		// if (a>20) {
+		// 	grad_cap_mode();
+		// }
 	}
 	return 0;
 }
+
+
 
 
 // if Z~=1G I'm Flat

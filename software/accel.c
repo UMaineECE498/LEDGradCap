@@ -42,3 +42,54 @@ int8_t axis_average(uint8_t axis)
 	a=a/8;					// Average
 	return a;
 }
+
+ORIENTATION_T accel_get_orientation(void)
+{
+	uint8_t threshold = 10;
+
+	uint8_t average = axis_average(ACCEL_X_AXIS);
+
+	// Start with X Axis (Right/Left)
+	if (average > threshold)
+	{
+		return accel_confirm_orientation(ORIENT_L, threshold);
+	} else if (average > threshold * -1) {
+		return accel_confirm_orientation(ORIENT_R, threshold * -1);
+	}
+
+	// Try Y axis (F/B)
+	average = axis_average(ACCEL_Y_AXIS);	
+	if (average > threshold)
+	{
+		return accel_confirm_orientation(ORIENT_F, threshold);
+	} else if (average > threshold * -1) {
+		return accel_confirm_orientation(ORIENT_B, threshold * -1);
+	}
+
+	return ORIENT_UK;		// Orientation not clear
+}
+
+ORIENTATION_T accel_confirm_orientation(ORIENTATION_T orientation, uint8_t threshold)
+{
+	uint8_t i;
+
+	for (i = 0; i < 8; i++)
+	{
+		_delay_ms(50);
+
+		if (orientation == ORIENT_L || orientation == ORIENT_R)
+		{
+			if (axis_average(ACCEL_X_AXIS) < threshold)
+			{
+				return ORIENT_UK;
+			}
+		} else if (orientation == ORIENT_F || orientation == ORIENT_B) {
+			if (axis_average(ACCEL_Y_AXIS) < threshold)
+			{
+				return ORIENT_UK;
+			}
+		}
+	}
+
+	return orientation;
+}
