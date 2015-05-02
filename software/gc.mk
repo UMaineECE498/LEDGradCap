@@ -7,7 +7,10 @@ CFLAGS=-funsigned-char -funsigned-bitfields -ffunction-sections -fno-inline-smal
 CFLAGS += -DF_CPU=$(F_CPU)
 SIZE=/usr/local/atmel/bin/avr-size
 LIBS=
+AVRDUDE=avrdude
+ifeq ($(USER),sheaff)
 AVRDUDE=/usr/local/bin/avrdude
+endif
 AVDFLAGS=-p t20 -P usb -c avrispmkII -F
 OBJCOPY=avr-objcopy
 OBJCFLAGS=-O ihex -R .eeprom -R .fuse -R .lock
