@@ -30,12 +30,15 @@ AVRDUDE_PORT = usb
 # List C source files here. (C dependencies are automatically generated.)
 SRC = accel.c led.c ledRoutines.c $(TARGET).c
 
+
+F_CPU = 8000000UL
+
 ############# Don't need to change below here for most purposes  (Elliot)
 
 # Optimization level, can be [0, 1, 2, 3, s]. 0 turns off optimization.
 # (Note: 3 is not always the best optimization level. See avr-libc FAQ.)
 ### OPT = s ##DEFAULT ## sheaff says soption means optimize for s (SIZE)
-OPT = 2
+OPT = s
 
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
@@ -86,6 +89,8 @@ $(patsubst %,-I%,$(EXTRAINCDIRS))
 #CFLAGS += -std=gnu89
 #CFLAGS += -std=c99
 CFLAGS += -std=gnu99
+
+CFLAGS += -DF_CPU=$(F_CPU)
 
 
 

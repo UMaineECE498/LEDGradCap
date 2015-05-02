@@ -1,16 +1,20 @@
 
+#ifndef F_CPU
 #define F_CPU 8000000UL
+#endif
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <string.h>
 #include <avr/pgmspace.h>
 
+
 #include "system.h"
 #include "i2cmaster.h"
 #include "led.h"
 #include "accel.h"
 #include "ledRoutines.h"
+
 
 
 int grad_cap_mode(void);
@@ -42,62 +46,17 @@ int main(void)
 	while (1) {
 		if (accel_get_orientation() == ORIENT_L)
 		{
-			red[1] = 100;
+			myfade();
 		} else {
-			red[1] = 0;
+			memset(red,0,8);
+			memset(green,0,8);
+			memset(blue,0,8);
 		}
 
 		send_leds(red, green, blue);
 
-		// if (a>20) {
-		// 	grad_cap_mode();
-		// }
 	}
 	return 0;
-}
-
-
-
-
-// if Z~=1G I'm Flat
-// if Z~=0 I'm Shaky Shaky
-int grad_cap_mode(void)
-{
-	uint8_t z = 0;
-
-	while (1) {
-		z = accel_reg_read(ACCEL_Z_AXIS) & 0x3F;
-		if (z > 16) {
-			return 1;
-		}
-
-	}
-
-	return 0;
-}
-
-void do_grad_cap(void)
-{
-	int step = 0;
-	int loops = 0;
-
-	while (grad_cap_mode()) {
-		if (loops < NUM_LOOPS) {
-			//change_leds(step);
-		}
-		step++;
-		if (step > MAX_STEPS) {
-			step = 0;
-			loops++;
-		}
-
-		if (accel_reg_read(ACCEL_X_AXIS) & 0x3F) {
-			step = 0;
-			loops = 0;
-		}
-		//@todo determine the best delay, sleep?
-		_delay_ms(100);
-	}
 }
 
 // Initiailize the system

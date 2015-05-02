@@ -1,9 +1,11 @@
 #include <stdint.h>
 #include <util/delay.h>
+#include <string.h>
 
 #include "system.h"
 #include "ledRoutines.h"
 #include "led.h"
+
 
 
 
@@ -52,4 +54,11 @@ void myfade(void)
  		send_leds(red,green,blue);
  		_delay_ms(FADE_DELAY);
  	}
+ }
+
+
+
+
+
+ 
 	
