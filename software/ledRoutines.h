@@ -7,8 +7,8 @@
 
 
 // Pattern routines
-void simpleFade(uint8_t *colorToFade, uint8_t inOrOut);
-//void vuMeter();
+
+void myfade(void);
 
 
 #endif // __ledRoutines_h__

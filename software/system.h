@@ -11,6 +11,10 @@
 #define LED_EN_DIR		DDRA
 #define LED_EN_PIN	PIN4
 
+#define NUM_LEDS	8
+#define NUM_FADE_STEPS 64
+#define FADE_DELAY 25
+
 extern uint8_t red[8];	// Red values
 extern uint8_t green[8];	// Green values
 extern uint8_t blue[8];	// Blue values

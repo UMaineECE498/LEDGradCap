@@ -1,6 +1,8 @@
 // A. Sheaff 1/24/2015
 // ECE 498 Blinky LED stuff
+#ifndef F_CPU
 #define F_CPU 8000000UL
+#endif
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
