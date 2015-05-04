@@ -8,7 +8,8 @@
 
 // Pattern routines
 
-void myfade(void);
+void rgbfade(void);
+void bwfade(void);
 
 
 #endif // __ledRoutines_h__

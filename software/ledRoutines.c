@@ -24,60 +24,73 @@ void fadecolor(int8_t rinc, int8_t ginc, int8_t binc)
 	}
 } 
 
-void myfade(void)
+void rgbfade(void)
 {
-
 
 	r=0;
 	g=0;
 	b=0;
-	//fade from off to full white
+	//fade from _+_+_ => R+G+B
 	fadecolor(1, 1, 1);
 
-	//fade from white to G+B
+	//fade  => R+_+B
 	fadecolor(0, -1, 0);
 
-	//fade from G+B => B
+	//fade  => _+_+B
 	fadecolor(-1, 0, 0);
 
-	//fade from B => B+R
+	//fade  => _+G+B
 	fadecolor(0, 1, 0);
 
-	//fade from B+R => R+G+B (White)
+	//fade  => R+G+B
 	fadecolor(1, 0, 0);
 
-	//fade from white to R+G
+	//fade  => R+G+_
 	fadecolor(0, 0, -1);
 
-	//fade from R+G => R
+	//fade  => R+_+_
 	fadecolor(0, -1, 0);
 
-	//fade from R => R+B
+	//fade  => R+_+B
 	fadecolor(0, 0, 1);
 
-	//fade from B+R => R+G+B (White)
+	//fade  => R+G+B
 	fadecolor(0, 1, 0);
 
-	//fade from white to R+G
+	//fade  => _+G+B
 	fadecolor(-1, 0, 0);
 
-	//fade from R+G => R
+	//fade  => _+G+_
 	fadecolor(0, 0, -1);
 
-	//fade from R => R+B
+	//fade  => R+G+_
 	fadecolor(1, 0, 0);
 
-	//fade from B+R => R+G+B (White)
+	//fade  => R+G+B
 	fadecolor(0, 0, 1);
 
-	//fade from white to off
+	//fade white to off
 	fadecolor(-1, -1, -1);
-
-
 
 }
 
+void bwfade(void) {
+	r=0;
+	g=0;
+	b=0;
+	//fade from _+_+_ => R+G+B
+	fadecolor(1, 1, 1);
 
+	//fade  => _+_+B
+	fadecolor(-1, -1, 0);
+
+	//fade  => R+G+B
+	fadecolor(1, 1, 0);
+
+	//fade  => _+_+_
+	fadecolor(-1, -1, -1);
+
+}
 
 
 
