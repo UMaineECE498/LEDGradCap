@@ -45,15 +45,17 @@ int8_t axis_average(uint8_t axis)
 
 ORIENTATION_T accel_get_orientation(void)
 {
-	uint8_t threshold = 10;
+	int8_t threshold = 10;
 
-	uint8_t average = axis_average(ACCEL_X_AXIS);
+	int8_t average = axis_average(ACCEL_X_AXIS);
 
 	// Start with X Axis (Right/Left)
 	if (average > threshold)
 	{
 		return accel_confirm_orientation(ORIENT_L, threshold);
-	} else if (average > threshold * -1) {
+	} 
+	else if (average < threshold * -1)
+	{
 		return accel_confirm_orientation(ORIENT_R, threshold * -1);
 	}
 
@@ -62,29 +64,36 @@ ORIENTATION_T accel_get_orientation(void)
 	if (average > threshold)
 	{
 		return accel_confirm_orientation(ORIENT_F, threshold);
-	} else if (average > threshold * -1) {
+	} 
+	else if (average < threshold * -1) 
+	{
 		return accel_confirm_orientation(ORIENT_B, threshold * -1);
 	}
 
 	return ORIENT_UK;		// Orientation not clear
 }
 
-ORIENTATION_T accel_confirm_orientation(ORIENTATION_T orientation, uint8_t threshold)
+ORIENTATION_T accel_confirm_orientation(ORIENTATION_T orientation, int8_t threshold)
 {
-	uint8_t i;
+	uint8_t i=0;
+	int8_t x=0, y=0;
 
 	for (i = 0; i < 8; i++)
 	{
 		_delay_ms(50);
+		x = axis_average(ACCEL_X_AXIS);
+		y = axis_average(ACCEL_Y_AXIS);
 
 		if (orientation == ORIENT_L || orientation == ORIENT_R)
 		{
-			if (axis_average(ACCEL_X_AXIS) < threshold)
+			if (-threshold < x && x < threshold)
 			{
 				return ORIENT_UK;
 			}
-		} else if (orientation == ORIENT_F || orientation == ORIENT_B) {
-			if (axis_average(ACCEL_Y_AXIS) < threshold)
+		}
+		else if (orientation == ORIENT_F || orientation == ORIENT_B)
+		{
+			if (-threshold < y && y < threshold)
 			{
 				return ORIENT_UK;
 			}

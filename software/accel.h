@@ -27,6 +27,6 @@ int8_t axis_average(uint8_t axis);
 ORIENTATION_T accel_get_orientation(void);
 
 // Debounce orientation detection
-ORIENTATION_T accel_confirm_orientation(ORIENTATION_T orientation, uint8_t threshold);
+ORIENTATION_T accel_confirm_orientation(ORIENTATION_T orientation, int8_t threshold);
 
 #endif // __accel_h__

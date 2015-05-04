@@ -36,13 +36,57 @@ uint8_t blue[8] = { 0 };	// Blue values
 int main(void)
 {
 	system_init();		// System init
-	send_leds(red, green, blue);	// Write
-
+	send_leds(red, green, blue);	// turn lights off
+	ORIENTATION_T orient;
+	int8_t x = 0;
+	int8_t y = 0;
 	while (1) {
-		if (accel_get_orientation() == ORIENT_L)
-		{
-			myfade();
+		orient = accel_get_orientation();
+		// if (orient == ORIENT_L)
+		// {
+		// 	// myfade();
+		// 	memset(red,0,8);
+		// 	memset(green,64,8);
+		// 	memset(blue,64,8);
+		// 	send_leds(red,green,blue);
+		// }
+		//  else if (orient == ORIENT_R) {
+		// 	memset(red,64,8);
+		// 	memset(green,0,8);
+		// 	memset(blue,0,8);
+		// 	send_leds(red,green,blue);
+		// } else if (orient == ORIENT_F) {
+		// 	memset(red,0,8);
+		// 	memset(green,64,8);
+		// 	memset(blue,0,8);
+		// 	send_leds(red,green,blue);
+		// } else if (orient == ORIENT_B) {
+		// 	memset(red,0,8);
+		// 	memset(green,0,8);
+		// 	memset(blue,64,8);
+		// 	send_leds(red,green,blue);
+		// } else {
+		// 	memset(red,64,8);
+		// 	memset(green,0,8);
+		// 	memset(blue,64,8);
+		// 	send_leds(red,green,blue);
+		// }
+		// x=axis_average(ACCEL_X_AXIS);
+		// y=axis_average(ACCEL_Y_AXIS);
+		memset(red,0,8);
+		memset(green,0,8);
+		memset(blue,0,8);
+		if(orient == ORIENT_L){
+			red[0] = 64;
+		} else if(orient == ORIENT_R) {
+			green[0] = 64;
 		}
+		if(orient == ORIENT_F){
+			red[1] = 64;
+		} else if(orient == ORIENT_B) {
+			green[1] = 64;
+		}
+		send_leds(red,green,blue);
 	}
 	return 0;
 }
