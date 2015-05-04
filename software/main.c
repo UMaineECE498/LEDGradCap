@@ -35,11 +35,6 @@ uint8_t blue[8] = { 0 };	// Blue values
 
 int main(void)
 {
-	int8_t x[8];		// X axis accel values
-	uint8_t i = 0;		// X axis index
-	uint8_t j = 0;		// General index
-	int16_t a = 0;		// Average value
-
 	system_init();		// System init
 	send_leds(red, green, blue);	// Write
 
@@ -47,14 +42,7 @@ int main(void)
 		if (accel_get_orientation() == ORIENT_L)
 		{
 			myfade();
-		} else {
-			memset(red,0,8);
-			memset(green,0,8);
-			memset(blue,0,8);
 		}
-
-		send_leds(red, green, blue);
-
 	}
 	return 0;
 }

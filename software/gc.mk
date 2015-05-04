@@ -12,10 +12,10 @@ ifeq ($(USER),sheaff)
 AVRDUDE=/usr/local/bin/avrdude
 endif
 AVDFLAGS=-p t20 -P usb -c avrispmkII -F
-OBJCOPY=avr-objcopy
+OBJCOPY=/usr/local/atmel/bin/avr-objcopy
 OBJCFLAGS=-O ihex -R .eeprom -R .fuse -R .lock
 
-OBJS=main.o led.o i2cmaster.S accel.o ledRoutines.o shaky.o
+OBJS=main.o led.o i2cmaster.S accel.o ledRoutines.o
 #LDFLAGS=-Wl,-u,vfprintf -lprintf_min
 
 .PHONY: program clean
